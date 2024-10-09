@@ -8,6 +8,7 @@ import Root, {
 } from "./routes/root.jsx";
 import ErrorPage from "./error-page.jsx";
 import Contact from "./routes/contact";
+import Experience from "./views/flip-coin/Experience.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
     ],
+  },
+  {
+    path: "flip-coin",
+    element: <Experience />,
   },
 ]);
 
