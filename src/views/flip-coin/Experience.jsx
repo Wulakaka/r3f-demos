@@ -1,17 +1,36 @@
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, PivotControls } from "@react-three/drei";
 import Coin from "./Coin.jsx";
 
 export default function Experience() {
   return (
-    <Canvas camera={{ position: [0, 0.1, 0.1], near: 0.001, far: 100 }}>
-      <OrbitControls />
+    <Canvas shadows camera={{ position: [0, 2, 4], near: 0.001, far: 100 }}>
+      <OrbitControls makeDefault />
       <ambientLight intensity={1} color="white" />
-      <pointLight intensity={10} color="white" position={[0, 0.4, 1]} />
+      <pointLight
+        intensity={100}
+        color="white"
+        position={[0, 4, 0]}
+        castShadow
+        shadow-mapSize={[1024, 1024]}
+        shadow-camera-near={1}
+        shadow-camera-far={10}
+        shadow-camera-top={10}
+        shadow-camera-right={10}
+        shadow-camera-bottom={-10}
+        shadow-camera-left={-10}
+      />
       <Coin />
-      <mesh position-x={0.2}>
-        <boxGeometry args={[0.1, 0.1, 0.1]} />
-        <meshStandardMaterial />
+      <PivotControls offset={[2, 0, 0]}>
+        <mesh castShadow position-x={2}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial />
+        </mesh>
+      </PivotControls>
+
+      <mesh receiveShadow rotation-x={-Math.PI / 2} position-y={-1}>
+        <planeGeometry args={[2, 2, 1, 1]} />
+        <meshStandardMaterial color="white" />
       </mesh>
     </Canvas>
   );
